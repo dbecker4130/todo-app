@@ -1,0 +1,16 @@
+html, body {
+    width: 100vw;
+    
+}
+
+.app {
+    border: 1px solid red;
+    width: 50%;
+
+    form {
+        input {
+            padding: 2%;
+            font-size: 1em;
+        }
+    }
+}

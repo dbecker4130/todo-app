@@ -1,2 +1,2 @@
 # ToDo-App
-ToDo App with a unique UI
+To Do App with a unique UI
