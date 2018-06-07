@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import './Reset.scss';
 import './App.scss';
 
@@ -14,10 +17,10 @@ class App extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return(
             <div className="app">
                 <h1>SHIT LIST</h1>
-                <List items={ this.state.items } />
                 <form onSubmit={ this.handleSubmit }>
                     <input
                         id="new-text"
@@ -25,10 +28,15 @@ class App extends Component {
                         onChange={ this.handleChange }
                         value={ this.state.text }
                     />
-                    <button>
+                    <Button
+                        type="submit"
+                        variant="outlined" 
+                        className={classes.button}
+                    >
                         Add #{ this.state.items.length + 1 }
-                    </button>
+                    </Button>
                 </form>
+                <List items={ this.state.items } />
             </div>
         )
     }
@@ -55,6 +63,10 @@ class App extends Component {
     }
 }
 
+App.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
 class List extends React.Component {
     render() {
         return (
@@ -67,4 +79,4 @@ class List extends React.Component {
     }
 }
 
-export default App;
+export default withStyles()(App);
