@@ -34,7 +34,9 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.2.0",
+    "express": "^4.16.3",
     "hoek": "^4.2.1",
+    "mongoose": "^5.1.6",
     "react": "^16.4.0",
     "react-autobind": "^1.0.6",
     "react-dom": "^16.4.0"
