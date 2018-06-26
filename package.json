@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
+    "server": "nodemon server/server.js",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -34,9 +35,13 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.2.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-promise-router": "^3.0.2",
     "hoek": "^4.2.1",
     "mongoose": "^5.1.6",
+    "nodemon": "^1.17.5",
     "react": "^16.4.0",
     "react-autobind": "^1.0.6",
     "react-dom": "^16.4.0"

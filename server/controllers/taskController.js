@@ -1,6 +1,4 @@
-const db = require('../models');
-
-const taskController = {};
+const Task = require('../models/task.js');
 
 module.exports = {
     postCreateTask: async(req, res) => {
@@ -10,8 +8,8 @@ module.exports = {
 
         if (!desc) return res.status(400).send('Must have a task description');
 
-        const task = await new db.Task({
-            desc
+        const task = await new Task({
+            ...req.body,
         }).save()
 
         return res.status(200).send(task);
