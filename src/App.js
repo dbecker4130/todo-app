@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import autoBind from 'react-autobind';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-// import InsetList from './MaterialList';
+
 import './Reset.scss';
 import './App.scss';
-// import { Checkbox, List, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -24,14 +24,29 @@ class App extends Component {
         this.state = {  
             items: [],
             text: '',
-            checked: []
+            allTasks: []
         };
     }
-            
-        render() {
-            const { classes } = this.props;
-            return(
-                <div className="App">
+
+    componentDidMount() {
+        
+        axios.get(`http://localhost:3000/api/task`)
+        .then( (response) => {
+            console.log(response.data)
+            this.setState({
+                allTasks: response.data,
+            })
+            console.log(this.state)
+        })
+        .catch( (error) => {
+            console.log(error);
+        });
+    }
+    
+    render() {
+        const { classes } = this.props;
+        return(
+            <div className="App">
                 <form onSubmit={ this.handleSubmit }>
                     <h1>SHIT LIST</h1>
                     <input
@@ -48,8 +63,16 @@ class App extends Component {
                         Add #{ this.state.items.length + 1 }
                     </Button>
                 </form>
-                <ListItems items={ this.state.items } />
-                {/* <InsetList classesList={ classesList } /> */}
+
+                {/* <AllTasks allTasks={ this.state.allTasks } /> */}
+                <ul>
+                { this.state.allTasks.map(({
+                    _id, desc, createdAt, 
+                }) => (
+                    <li key={ _id }>{ desc }</li>
+                ))}
+            
+            </ul>
                 
             </div>
         )
@@ -60,20 +83,26 @@ class App extends Component {
             text: e.target.value
         });
     }
-    
+
     handleSubmit(e) {
         e.preventDefault();
-        if (!this.state.text.length) {
-            return;
-        }
-        const newItem = {
-            text: this.state.text,
-            id: Date.now()
-        };
-        this.setState(prevState => ({
-            items: prevState.items.concat(newItem),
-            text: ''
-        }));
+
+        axios.post(`http://localhost:3000/api/task/new`, {
+            desc: this.state.text
+        })
+        .then( (response) => {
+            console.log('POST RES', response.data);
+            const newItem = {
+                text: this.state.text
+            };
+            this.setState(prevState => ({
+                allTasks: prevState.allTasks.concat(newItem),
+                text: ''
+            }))
+        })
+        .catch( (error) => {
+            console.log(error);
+        })
     }
 }
 
@@ -81,16 +110,17 @@ App.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-class ListItems extends React.Component {
-    render() {
-        return (
-            <ul>
-                { this.props.items.map(item => (
-                    <li key={ item.id }>{ item.text }</li>
-                ))}
-            </ul>
-        )
-    }
-}
+// class AllTasks extends React.Component {
+//     render() {
+//         return (
+//             <ul>
+//                 { this.state.allTasks.map(item => (
+//                     <li key={ item._id }>{ item.desc }</li>
+//                 ))}
+            
+//             </ul>
+//         )
+//     }
+// }
 
 export default withStyles(styles)(App);

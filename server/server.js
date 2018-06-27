@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const MONGODB_URI = 'mongodb://localhost/ToDos';
 
@@ -13,7 +14,9 @@ const app = express();
 mongoose.connect(MONGODB_URI);
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/api', routes);
+
 
 app.listen(port, () => {
     console.log(`app listening on port: ${port}`);
