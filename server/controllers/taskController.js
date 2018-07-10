@@ -27,6 +27,7 @@ module.exports = {
     deleteTask: async(req, res) => {
         console.log('taskController.deleteTask()');
         const { _id } = req.body;
+        console.log('REQ BODY', req.body)
         await Task.remove({ _id: _id })
         return res.status(204).json({ message: 'Successfully deleted task'})
     }
