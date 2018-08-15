@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const AddTask = (props) => {
     return (
         <div>
-
             <h1>SHIT LIST</h1>
             <input
                 placeholder="what is it?"
@@ -16,7 +15,6 @@ const AddTask = (props) => {
                 >
                 Add 
             </button>
-
         </div>
 
     )

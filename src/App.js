@@ -41,8 +41,13 @@ class App extends Component {
         })
     }
 
+    _handleDelete(id) {
+        this.setState(prevState => ({
+            allTasks: prevState.allTasks.filter(el => el != id)
+        }));
+    }
+
     render() {
-        console.log("STATE", this.state)
         return(
             <div className="App">
 
@@ -56,7 +61,10 @@ class App extends Component {
 
                 <h2>All Tasks</h2>
         
-                <List tasks={this.state.allTasks} />
+                <List 
+                    tasks={this.state.allTasks} 
+                    handleDelete={this._handleDelete}
+                />
                 
             </div>
         )
