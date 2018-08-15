@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import { withStyles } from '@material-ui/core/styles';
 
-import AllTasks from './Tasks';
-import CreateTask from './CreateTask';
+import List from './List';
+import AddTask from './AddTask';
 
 import './Reset.scss';
 import './App.scss';
@@ -22,27 +21,51 @@ class App extends Component {
         super() 
         autoBind(this);
         this.state = {  
-            // allTasks: []
+            allTasks: [],
+            text: ''
         };
+    }
+
+    _handleChange(e) {
+        this.setState({
+            text: e.target.value
+        });
+    } 
+    _handleSubmit(e) {
+        e.preventDefault();
+        console.log('Submit fired')
+
+        this.setState({
+            allTasks: [...this.state.allTasks, this.state.text],
+            text: ''
+        })
+    }
+
+    _handleDelete(id) {
+        this.setState(prevState => ({
+            allTasks: prevState.allTasks.filter(el => el != id)
+        }));
     }
 
     render() {
         return(
             <div className="App">
-
-                <CreateTask />
-
-                <AllTasks 
-                    allTasks={ this.state.allTasks }
+                
+                <AddTask 
+                    handleChange={this._handleChange}
+                    handleSubmit={this._handleSubmit} 
+                    task={this.state.text}
                 />
-
+        
+                <List 
+                    tasks={this.state.allTasks} 
+                    handleDelete={this._handleDelete}
+                />
+                
             </div>
         )
-    }  
+    } 
+
 }
 
-// App.propTypes = {
-//     allTasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-// }
-
-export default withStyles(styles)(App);
+export default withStyles()(App);
