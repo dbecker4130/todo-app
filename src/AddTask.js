@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './AddTask.scss';
+
 const AddTask = (props) => {
     return (
-        <div>
-            <h1>SHIT LIST</h1>
+        <div className="AddTask">
+            <h1>MY LIST</h1>
             <input
                 placeholder="what is it?"
                 onChange={ props.handleChange }

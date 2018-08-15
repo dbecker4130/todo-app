@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import List from './List';
 import AddTask from './AddTask';
@@ -8,13 +8,13 @@ import AddTask from './AddTask';
 import './Reset.scss';
 import './App.scss';
 
-// const styles = theme => ({
-//     root: {
-//         width: '100%',
-//         maxWidth: 360,
-//         backgroundColor: theme.palette.background.paper,
-//     },
-// });
+const styles = theme => ({
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    },
+});
 
 class App extends Component {
     constructor() {
@@ -50,16 +50,12 @@ class App extends Component {
     render() {
         return(
             <div className="App">
-
-                <h2>Add a task</h2>
                 
                 <AddTask 
                     handleChange={this._handleChange}
                     handleSubmit={this._handleSubmit} 
                     task={this.state.text}
                 />
-
-                <h2>All Tasks</h2>
         
                 <List 
                     tasks={this.state.allTasks} 
@@ -72,4 +68,4 @@ class App extends Component {
 
 }
 
-export default (App);
+export default withStyles()(App);
