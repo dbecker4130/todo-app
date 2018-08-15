@@ -10,11 +10,17 @@ const List = (props) => {
                 task, index
             ) => (
                 <li key={index} className="todo-item">
-                    <input type="checkbox" />
-                        <label>{task}</label>
+                    <label className="check-container">{task}
+                        <input type="checkbox" />
+                        <span className="checkmark"></span>
+                    
                     <button onClick={ props.handleDelete.bind(this, task) }>
                         Delete
                     </button>
+                    <button>
+                        Edit
+                    </button>
+                    </label>
                 
                 </li>
             ))}
