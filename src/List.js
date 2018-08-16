@@ -3,33 +3,34 @@ import PropTypes from 'prop-types';
 
 import './List.scss'
 
+
 const List = (props) => {
+    // console.log('PROPS', props)
+    const items = props.tasks.map(({desc, _id, createdAt}) => {
+        return (
+            <li key={_id} className="todo-item">
+                <label className="check-container">
+                    {desc}
+                    <input type="checkbox" />
+                    <span className="checkmark"></span>
+                </label>
+
+                <button onClick={ props.handleDelete.bind(this, _id) }>
+                    Delete
+                </button>
+            </li>
+        )
+    });
     return (
         <ul className="List">
-            { props.tasks.map((
-                task, index
-            ) => (
-                <li key={index} className="todo-item">
-                    <label className="check-container">{task}
-                        <input type="checkbox" />
-                        <span className="checkmark"></span>
-                    
-                    <button onClick={ props.handleDelete.bind(this, task) }>
-                        Delete
-                    </button>
-                    <button>
-                        Edit
-                    </button>
-                    </label>
-                
-                </li>
-            ))}
+            {items}
         </ul>
     )
 }
 
 List.propTypes = {
-    handleDelete: PropTypes.func.isRequired
+    handleDelete: PropTypes.func.isRequired,
+    // tasks: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default List;

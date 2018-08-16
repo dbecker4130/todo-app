@@ -9,7 +9,8 @@ const routes = require('express-promise-router')()
 // TASK
 
 routes.post('/task/new', taskController.postCreateTask);
-routes.delete('/task/:taskID', taskController.deleteTask);
+routes.delete('/task/all', taskController.deleteAllTasks);
+routes.post('/task/:id', taskController.deleteTask);
 routes.get('/task', taskController.getAllTasks);
 
 module.exports = routes;

@@ -25,10 +25,22 @@ module.exports = {
     },
     // DELETE A TASK
     deleteTask: async(req, res) => {
-        console.log('taskController.deleteTask()');
+        console.log('taskController.deleteOneTask()');
         const { _id } = req.body;
         console.log('REQ BODY', req.body)
         await Task.remove({ _id: _id })
         return res.status(204).json({ message: 'Successfully deleted task'})
+    },
+
+    // deleteTask: async(req, res) => {
+    //     console.log('taskController.deleteTask()');
+    //     const { id } = req.body;
+    //     await Task.findOneAndDelete({ _id: id })
+    //     return res.status(204).json({ message: 'successfully deleted task'})
+    // },
+    deleteAllTasks: async(req, res) => {
+        console.log('taskController.deleteAllTasks()');
+        await Task.remove({ })
+        return res.status(204).json({ message: 'all tasks deleted'})
     }
 }
