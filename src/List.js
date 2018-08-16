@@ -5,7 +5,6 @@ import './List.scss'
 
 
 const List = (props) => {
-    // console.log('PROPS', props)
     const items = props.tasks.map(({desc, _id, createdAt}) => {
         return (
             <li key={_id} className="todo-item">
@@ -30,7 +29,6 @@ const List = (props) => {
 
 List.propTypes = {
     handleDelete: PropTypes.func.isRequired,
-    // tasks: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default List;

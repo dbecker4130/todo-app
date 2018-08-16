@@ -18,7 +18,6 @@ const AddTask = (props) => {
                 Add 
             </button>
         </div>
-
     )
 }
 

@@ -10,7 +10,6 @@ const routes = require('./routes');
 
 const app = express();
 
-// mongoose.connect(process.env.MONGODB_LOCAL);
 mongoose.connect(MONGODB_URI);
 
 app.use(bodyParser.json());

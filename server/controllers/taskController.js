@@ -18,7 +18,6 @@ module.exports = {
     // GET ALL TASKS
     getAllTasks: async(req, res) => {
         console.log('taskController.getAllTasks()');
-
         const allTasks = await Task.find({})
         if (!allTasks) return res.status(404).send('Sorry, no tasks found');
         return res.status(200).send(allTasks);
@@ -31,13 +30,7 @@ module.exports = {
         await Task.remove({ _id: _id })
         return res.status(204).json({ message: 'Successfully deleted task'})
     },
-
-    // deleteTask: async(req, res) => {
-    //     console.log('taskController.deleteTask()');
-    //     const { id } = req.body;
-    //     await Task.findOneAndDelete({ _id: id })
-    //     return res.status(204).json({ message: 'successfully deleted task'})
-    // },
+    // DELETE ALL TASKS
     deleteAllTasks: async(req, res) => {
         console.log('taskController.deleteAllTasks()');
         await Task.remove({ })

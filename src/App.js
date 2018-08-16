@@ -21,7 +21,6 @@ class App extends Component {
     componentDidMount() {
         axios.get(`http://localhost:3000/api/task`)
         .then( (res) => {
-            // console.log('RES', res.data)
             this.setState({
                 allTasks: res.data,
             })
@@ -31,13 +30,11 @@ class App extends Component {
             console.log(err);
         })
     }
-
     _handleChange(e) {
         this.setState({
             text: e.target.value
         });
     } 
-  
     _handleSubmit(e) {
         e.preventDefault()
         console.log('POST fired');
@@ -76,7 +73,6 @@ class App extends Component {
             console.log(err);
         })
     }
-
     _handleDeleteAll() {    
         axios.delete(`http://localhost:3000/api/task/all`)
         .then( (res) => {
