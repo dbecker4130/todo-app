@@ -7,16 +7,18 @@ const AddTask = (props) => {
     return (
         <div className="AddTask">
             <h1>MY LIST</h1>
-            <input
-                placeholder="what is it?"
-                onChange={ props.handleChange }
-                value={ props.task }
-                />
-            <button
-                onClick={ props.handleSubmit }
-                >
-                Add 
-            </button>
+            <form onSubmit={ props.handleSubmit }>
+                <input
+                    placeholder="what is it?"
+                    type="text"
+                    onChange={ props.handleChange }
+                    value={ props.task }
+                    />
+                <button
+                    onClick={ props.handleSubmit }>
+                    Add 
+                </button>
+            </form>
         </div>
     )
 }

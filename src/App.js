@@ -34,7 +34,7 @@ class App extends Component {
         this.setState({
             text: e.target.value
         });
-    } 
+    }
     _handleSubmit(e) {
         e.preventDefault()
         console.log('POST fired');
@@ -45,9 +45,10 @@ class App extends Component {
         .then( (res) => {
             console.log('POST RES', res.data);
             this.setState({
-                allTasks: [...this.state.allTasks, this.state.text],
+                allTasks: [...this.state.allTasks, res.data],
                 text: ''
             })
+            console.log(this.state)
         })
         .catch( (err) => {
             console.log(err);
