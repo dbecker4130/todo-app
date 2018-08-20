@@ -7,6 +7,7 @@ import AddTask from './AddTask';
 
 import './Reset.scss';
 import './App.scss';
+import Dropdown from './Dropdown';
 
 class App extends Component {
     constructor() {
@@ -14,7 +15,8 @@ class App extends Component {
         autoBind(this);
         this.state = {  
             allTasks: [],
-            text: ''
+            completed: [],
+            text: '',
         };
     }
 
@@ -26,6 +28,13 @@ class App extends Component {
             })
             console.log('CPM state', this.state)
         })
+        .then(() => {
+            this.state.allTasks.forEach((task) => {
+                if (task.checked === true) {
+                    this.state.completed.push(task)
+                }
+            })
+        })
         .catch( (err) => {
             console.log(err);
         })
@@ -34,6 +43,24 @@ class App extends Component {
         this.setState({
             text: e.target.value
         });
+    }
+ 
+    _handleChecked(_id) {
+        console.log('incoming ID', _id)
+        axios.put(`http://localhost:3000/api/task/update`, {
+            _id: _id,
+        })
+        .then( (res) => {
+            console.log('PUT RES', res.data);
+            this.setState({
+                completed: [...this.state.completed, res.data],
+                text: ''
+            })
+            console.log('new STATE', this.state)
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
     }
     _handleSubmit(e) {
         e.preventDefault()
@@ -99,6 +126,10 @@ class App extends Component {
                 <List 
                     tasks={this.state.allTasks} 
                     handleDelete={this._handleDelete}
+                    handleChecked={this._handleChecked}
+                />
+                <Dropdown
+                    completed={this.state.completed}
                 />
                 <button onClick={this._handleDeleteAll}>Clear All</button> 
             </div>
