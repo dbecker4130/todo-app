@@ -50,7 +50,7 @@
         .check-container input:checked ~ .checkmark:after {
             display: block;
         }
-
+        
         .check-container .checkmark:after {
             left: 9px;
             top: 5px;
@@ -60,5 +60,8 @@
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
         }
+    }
+    .todo-item:hover {
+        background-color: red;
     }
 }

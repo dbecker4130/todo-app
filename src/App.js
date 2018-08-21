@@ -4,10 +4,10 @@ import autoBind from 'react-autobind';
 
 import List from './List';
 import AddTask from './AddTask';
+import Completed from './Completed';
 
 import './Reset.scss';
 import './App.scss';
-import Dropdown from './Dropdown';
 
 class App extends Component {
     constructor() {
@@ -26,13 +26,15 @@ class App extends Component {
             this.setState({
                 allTasks: res.data,
             })
-            console.log('CPM state', this.state)
         })
         .then(() => {
             this.state.allTasks.forEach((task) => {
                 if (task.checked === true) {
-                    this.state.completed.push(task)
+                    this.setState({
+                        completed: [...this.state.completed, task]
+                    })
                 }
+                console.log('CPM state', this.state)
             })
         })
         .catch( (err) => {
@@ -128,10 +130,16 @@ class App extends Component {
                     handleDelete={this._handleDelete}
                     handleChecked={this._handleChecked}
                 />
-                <Dropdown
+                <button 
+                    onClick={this._handleDeleteAll}
+                    className="clear-all-btn">
+                    Clear All
+                </button> 
+
+                <Completed 
                     completed={this.state.completed}
-                />
-                <button onClick={this._handleDeleteAll}>Clear All</button> 
+                    />
+
             </div>
         )
     } 

@@ -1,11 +1,16 @@
 html, body {
     width: 100vw;
     background-color: #f9f9f9;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .App {
-    margin: 5vw auto 0 auto;
+    margin: 5vw auto 5vw auto;
     width: 50%;
     background-color: #0070cd;
+
+    .clear-all-btn {
+        margin-left: 12%;
+    }
     
 }
