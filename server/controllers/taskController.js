@@ -37,13 +37,6 @@ module.exports = {
         return res.status(204).json({ message: 'all tasks deleted'})
     },
     // UPDATE A TASK
-    updateTask: async(req, res) => {
-        console.log('taskController.updateTask()');
-        const { _id } = req.body
-        if (!_id) return res.status(400).json({ error: 'no id provided' })
-        await Task.update({ checked: true })
-        return res.status(200).json({ message: 'sucessfully updated'})
-    },
     updateChecked: async(req, res) => {
         console.log('taskController.updateChecked()');
         const { _id } = req.body
@@ -51,6 +44,14 @@ module.exports = {
         const updatedTask = await Task.findByIdAndUpdate(_id, { checked: true })
         console.log('TASK AFTER UPDATE', updatedTask)
         return res.status(200).send(updatedTask)
+    },
+    // UNDO COMPLETED TASK
+    undoCompleteTask: async(req, res) => {
+        console.log('taskController.undoCompleteTask()');
+        const { _id } = req.body
+        const undoneTask = await Task.findByIdAndUpdate(_id, { checked: false })
+        console.log('TASK AFTER UNDO', undoneTask)
+        return res.status(200).send(undoneTask)
     }
 
 }

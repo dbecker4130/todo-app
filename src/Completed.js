@@ -34,6 +34,9 @@ class Completed extends Component {
                     <button onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
                         Delete
                     </button>
+                    <button onClick={ this.props.handleUndoChecked.bind(this, _id) }>
+                        Undo
+                    </button>
                 </li> 
             )
         });

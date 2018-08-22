@@ -26,7 +26,7 @@ class App extends Component {
             console.log('res.data', res.data)
             res.data.forEach((task) => {
                 console.log(task.checked)
-                if (task.checked === undefined || false) {
+                if (task.checked === undefined || task.checked === false) {
                     this.setState({
                         allTasks: [...this.state.allTasks, task]
                     })
@@ -49,7 +49,8 @@ class App extends Component {
         });
     }
  
-    _handleChecked(_id) {
+    _handleChecked(_id, e) {
+        e.preventDefault();
         console.log('incoming ID', _id)
         axios.put(`http://localhost:3000/api/task/update`, {
             _id: _id,
@@ -70,6 +71,25 @@ class App extends Component {
         .catch( (err) => {
             console.log(err);
         })
+    }
+    _handleUndoChecked(_id) {
+        axios.put(`http://localhost:3000/api/task/undo`, {
+            _id: _id,
+        })
+        .then( (res) => {
+            console.log('PUT RES', res.data);
+            const index = this.state.completed.findIndex(a => a._id === _id)
+            this.setState({
+                completed: this.state.completed.filter((_, i) => i !== index),
+                allTasks: [...this.state.allTasks, res.data],
+                text: ''
+            })
+            console.log('updated STATE', this.state)
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
+
     }
     _handleSubmit(e) {
         e.preventDefault()
@@ -163,6 +183,7 @@ class App extends Component {
                 <Completed 
                     completed={this.state.completed}
                     handleDeleteComplete={this._handleDeleteComplete}
+                    handleUndoChecked={this._handleUndoChecked}
                     />
 
             </div>
