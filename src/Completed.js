@@ -13,29 +13,19 @@ class Completed extends Component {
         };
     }
 
-    selectItem(_id) {
-        console.log('incoming ID', _id)
-        console.log('props coming in', this.props.completed)
-        const index = this.props.completed.findIndex(a => a._id === _id)
-        console.log('INDEX', index)
-        if (index === -1) return;
-
-    }
-
     render() {
         const completedItems = this.props.completed.map(({desc, createdAt, _id}) => {
             return (
                 <li  
                     key={_id} 
-                    className="completed-item"
-                    onClick={this.selectItem.bind(this, _id)}>
+                    className="completed-item">
                       {desc}
 
-                    <button onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
-                        Delete
+                    <button className="undo-comp-btn" onClick={ this.props.handleUndoChecked.bind(this, _id) }>
+                        <i class="far fa-edit"></i>
                     </button>
-                    <button onClick={ this.props.handleUndoChecked.bind(this, _id) }>
-                        Undo
+                    <button className="del-comp-btn" onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
+                    <i class="fas fa-times"></i>
                     </button>
                 </li> 
             )
