@@ -110,12 +110,29 @@ class App extends Component {
             console.log(err);
         })
     }
+    _handleDeleteComplete(_id) {
+        axios.post(`http://localhost:3000/api/task/${_id}`, {
+            _id: _id
+        })
+        .then( (res) => {
+            console.log('DEL COMPLETE RES', res.data)
+            let newState = this.state;
+            const index = newState.completed.findIndex(a => a._id === _id)
+            if (index === -1) return;
+            this.state.completed.splice(index, 1);
+            this.setState(newState);
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
+    }
     _handleDeleteAll() {    
         axios.delete(`http://localhost:3000/api/task/all`)
         .then( (res) => {
             console.log('DEL ALL RES', res)
             this.setState({
                 allTasks: [],
+                completed: [],
                 text: ''
             });
         })
@@ -145,6 +162,7 @@ class App extends Component {
 
                 <Completed 
                     completed={this.state.completed}
+                    handleDeleteComplete={this._handleDeleteComplete}
                     />
 
             </div>

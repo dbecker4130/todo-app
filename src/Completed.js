@@ -30,6 +30,10 @@ class Completed extends Component {
                     className="completed-item"
                     onClick={this.selectItem.bind(this, _id)}>
                       {desc}
+
+                    <button onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
+                        Delete
+                    </button>
                 </li> 
             )
         });
