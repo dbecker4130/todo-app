@@ -11,7 +11,10 @@ const List = (props) => {
             <li key={_id} className="todo-item">
                 <label className="check-container">
                     {desc}
-                    <input id="todo-checkbox" type="checkbox" onClick={ props.handleChecked.bind(this, _id) }/>
+                    <input 
+                        id="todo-checkbox" 
+                        type="checkbox" 
+                        onClick={ props.handleChecked.bind(this, _id) }/>
                     <span className="checkmark"></span>
 
                     <button onClick={ props.handleDelete.bind(this, _id) }>

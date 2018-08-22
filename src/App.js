@@ -54,11 +54,15 @@ class App extends Component {
         })
         .then( (res) => {
             console.log('PUT RES', res.data);
-            this.setState({
-                completed: [...this.state.completed, res.data],
-                text: ''
-            })
-            console.log('new STATE', this.state)
+            if (_id === res.data._id) {
+                return;
+            } else {
+                this.setState({
+                    completed: [...this.state.completed, res.data],
+                    text: ''
+                })
+                console.log('new STATE', this.state)
+            }
         })
         .catch( (err) => {
             console.log(err);
