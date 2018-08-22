@@ -23,19 +23,21 @@ class App extends Component {
     componentDidMount() {
         axios.get(`http://localhost:3000/api/task`)
         .then( (res) => {
-            this.setState({
-                allTasks: res.data,
-            })
-        })
-        .then(() => {
-            this.state.allTasks.forEach((task) => {
+            console.log('res.data', res.data)
+            res.data.forEach((task) => {
+                console.log(task.checked)
+                if (task.checked === undefined || false) {
+                    this.setState({
+                        allTasks: [...this.state.allTasks, task]
+                    })
+                }
                 if (task.checked === true) {
                     this.setState({
                         completed: [...this.state.completed, task]
                     })
                 }
-                console.log('CPM state', this.state)
             })
+                console.log('refresh state', this.state)
         })
         .catch( (err) => {
             console.log(err);
@@ -54,15 +56,16 @@ class App extends Component {
         })
         .then( (res) => {
             console.log('PUT RES', res.data);
-            if (_id === res.data._id) {
-                return;
-            } else {
-                this.setState({
-                    completed: [...this.state.completed, res.data],
-                    text: ''
-                })
-                console.log('new STATE', this.state)
-            }
+            const index = this.state.allTasks.findIndex(a => a._id === _id)
+            console.log('INDEX', index)
+
+            this.setState({
+                allTasks: this.state.allTasks.filter((_, i) => i !== index),
+                completed: [...this.state.completed, res.data],
+                text: ''
+            })
+            console.log('new STATE', this.state)
+            
         })
         .catch( (err) => {
             console.log(err);
