@@ -4,15 +4,11 @@ module.exports = {
     // CREATE A TASK 
     postCreateTask: async(req, res) => {
         console.log('taskController.postCreateTask()');
-
         const { desc } = req.body;
-
         if (!desc) return res.status(400).send('Must have a task description');
-
         const task = await new Task({
             ...req.body,
         }).save()
-
         return res.status(200).send(task);
     },
     // GET ALL TASKS
@@ -26,7 +22,6 @@ module.exports = {
     deleteTask: async(req, res) => {
         console.log('taskController.deleteOneTask()');
         const { _id } = req.body;
-        console.log('REQ BODY', req.body)
         await Task.remove({ _id: _id })
         return res.status(204).json({ message: 'Successfully deleted task'})
     },
@@ -40,9 +35,7 @@ module.exports = {
     updateChecked: async(req, res) => {
         console.log('taskController.updateChecked()');
         const { _id } = req.body
-        console.log('ID', _id)
         const updatedTask = await Task.findByIdAndUpdate(_id, { checked: true })
-        console.log('TASK AFTER UPDATE', updatedTask)
         return res.status(200).send(updatedTask)
     },
     // UNDO COMPLETED TASK
@@ -50,7 +43,6 @@ module.exports = {
         console.log('taskController.undoCompleteTask()');
         const { _id } = req.body
         const undoneTask = await Task.findByIdAndUpdate(_id, { checked: false })
-        console.log('TASK AFTER UNDO', undoneTask)
         return res.status(200).send(undoneTask)
     }
 

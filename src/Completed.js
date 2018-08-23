@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
-// import { Dropdown, DropdownMenu } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import './Completed.scss'
 
-class Completed extends Component {
-    constructor() {
-        super()
-        autoBind(this);
-        this.state = {
-            selected: false,
-        };
-    }
-
-    render() {
-        const completedItems = this.props.completed.map(({desc, createdAt, _id}) => {
-            return (
-                <li  
-                    key={_id} 
-                    className="completed-item">
-                      {desc}
-
-                    <button className="undo-comp-btn" onClick={ this.props.handleUndoChecked.bind(this, _id) }>
-                        <i class="far fa-edit"></i>
-                    </button>
-                    <button className="del-comp-btn" onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
-                    <i class="fas fa-times"></i>
-                    </button>
-                </li> 
-            )
-        });
+const Completed = (props) => {
+    const completedItems = props.completed.map(({desc, createdAt, _id}) => {
         return (
-            <ul className="completed-list">
-                <h2>COMPLETED</h2>
-                {completedItems}
-            </ul>
+            <li  
+                key={_id} 
+                className="completed-item">
+                    {desc}
+
+                <button className="undo-comp-btn" onClick={ props.handleUndoChecked.bind(this, _id) }>
+                    <i className="fas fa-undo"></i>
+                </button>
+                <button className="del-comp-btn" onClick={ props.handleDeleteComplete.bind(this, _id) }>
+                <i className="fas fa-times"></i>
+                </button>
+            </li> 
         )
-    }
+    });
+    return (
+        <ul className="completed-list">
+            <h1>COMPLETED</h1>
+            {completedItems}
+        </ul>
+    )
 }
+
+Completed.propTypes = {
+    handleDeleteComplete: PropTypes.func.isRequired,
+    handleUndoChecked: PropTypes.func.isRequired,
+}
+
 
 export default Completed;

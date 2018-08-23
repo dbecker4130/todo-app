@@ -6,7 +6,7 @@ import './AddTask.scss';
 const AddTask = (props) => {
     return (
         <div className="AddTask">
-            <h1>MY LIST</h1>
+            <h1>MY SHIT LIST</h1>
             <form onSubmit={ props.handleSubmit }>
                 <input
                     placeholder="what is it?"
