@@ -5,6 +5,7 @@ import autoBind from 'react-autobind';
 import List from './List';
 import AddTask from './AddTask';
 import Completed from './Completed';
+import Dropdown from './Dropdown';
 
 import './Reset.scss';
 import './App.scss';
@@ -176,6 +177,8 @@ class App extends Component {
                     handleDeleteComplete={this._handleDeleteComplete}
                     handleUndoChecked={this._handleUndoChecked}
                     />
+
+                <Dropdown />
 
             </div>
         )
