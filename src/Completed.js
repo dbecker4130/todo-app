@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Dropdown from './Dropdown';
+
 import './Completed.scss'
 
 const Completed = (props) => {
@@ -17,6 +19,7 @@ const Completed = (props) => {
                 <button className="del-comp-btn" onClick={ props.handleDeleteComplete.bind(this, _id) }>
                 <i className="fas fa-times"></i>
                 </button>
+                    <Dropdown />
             </li> 
         )
     });

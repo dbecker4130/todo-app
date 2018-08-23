@@ -178,8 +178,6 @@ class App extends Component {
                     handleUndoChecked={this._handleUndoChecked}
                     />
 
-                <Dropdown />
-
             </div>
         )
     } 

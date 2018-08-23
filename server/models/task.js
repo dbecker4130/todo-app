@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema({
     desc: { type: String },
+    extra: { type: String },
     createdAt: { type: Date, default: Date.now() },
     checked: { type: Boolean }
 });
