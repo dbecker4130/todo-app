@@ -1,14 +1,33 @@
 .completed-list {
-    // border: 1px solid orange;
-    padding: 1%;
-    h2 {
-        color: #fff;
-        text-align: center;
-    }
     .completed-item {
-        border: 1px solid #444;
+        border-radius: 5px;
         color: #fff;
-        text-align: center;
-        padding: 2%;
+        font-size: 1.25em;
+        padding: 2% 0 2% 6vw;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+        background-color: #2196F3;
+
+        .del-comp-btn {
+            font-size: 0.75em;
+            padding: 1.5%;
+            background: #0070cd;
+            color: #fff;
+            &:hover {
+                color: #fff;
+                background: red;
+            }
+        }
+
+        .undo-comp-btn {
+            font-size: 0.75em;
+            padding: 1.5%;
+            background: #0070cd;
+            color: #fff;
+            &:hover {
+                color: #fff;
+                background: orange;
+            }
+        }   
     }
 }

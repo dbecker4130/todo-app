@@ -1,52 +1,37 @@
 import React, { Component } from 'react';
-import autoBind from 'react-autobind';
-// import { Dropdown, DropdownMenu } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import './Completed.scss'
 
-class Completed extends Component {
-    constructor() {
-        super()
-        autoBind(this);
-        this.state = {
-            selected: false,
-        };
-    }
-
-    selectItem(_id) {
-        console.log('incoming ID', _id)
-        console.log('props coming in', this.props.completed)
-        const index = this.props.completed.findIndex(a => a._id === _id)
-        console.log('INDEX', index)
-        if (index === -1) return;
-
-    }
-
-    render() {
-        const completedItems = this.props.completed.map(({desc, createdAt, _id}) => {
-            return (
-                <li  
-                    key={_id} 
-                    className="completed-item"
-                    onClick={this.selectItem.bind(this, _id)}>
-                      {desc}
-
-                    <button onClick={ this.props.handleDeleteComplete.bind(this, _id) }>
-                        Delete
-                    </button>
-                    <button onClick={ this.props.handleUndoChecked.bind(this, _id) }>
-                        Undo
-                    </button>
-                </li> 
-            )
-        });
+const Completed = (props) => {
+    const completedItems = props.completed.map(({desc, createdAt, _id}) => {
         return (
-            <ul className="completed-list">
-                <h2>COMPLETED</h2>
-                {completedItems}
-            </ul>
+            <li  
+                key={_id} 
+                className="completed-item">
+                    {desc}
+
+                <button className="undo-comp-btn" onClick={ props.handleUndoChecked.bind(this, _id) }>
+                    <i className="fas fa-undo"></i>
+                </button>
+                <button className="del-comp-btn" onClick={ props.handleDeleteComplete.bind(this, _id) }>
+                <i className="fas fa-times"></i>
+                </button>
+            </li> 
         )
-    }
+    });
+    return (
+        <ul className="completed-list">
+            <h1>COMPLETED</h1>
+            {completedItems}
+        </ul>
+    )
 }
+
+Completed.propTypes = {
+    handleDeleteComplete: PropTypes.func.isRequired,
+    handleUndoChecked: PropTypes.func.isRequired,
+}
+
 
 export default Completed;

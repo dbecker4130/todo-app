@@ -8,13 +8,13 @@ import './List.scss'
 const List = (props) => {
     const items = props.tasks.map(({desc, _id, createdAt}) => {
         return (
-            <li key={_id} className="todo-item">
+            <li key={_id} className="todo-item" onClick={ props.handleChecked.bind(this, _id) }>
                 <label className="check-container">
                     {desc}
                     <input 
                         id="todo-checkbox" 
                         type="checkbox" 
-                        onClick={ props.handleChecked.bind(this, _id) }/>
+                        />
                     <span className="checkmark"></span>
 
                     <button onClick={ props.handleDelete.bind(this, _id) }>

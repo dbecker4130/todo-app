@@ -25,7 +25,6 @@ class App extends Component {
         .then( (res) => {
             console.log('res.data', res.data)
             res.data.forEach((task) => {
-                console.log(task.checked)
                 if (task.checked === undefined || task.checked === false) {
                     this.setState({
                         allTasks: [...this.state.allTasks, task]
@@ -51,15 +50,12 @@ class App extends Component {
  
     _handleChecked(_id, e) {
         e.preventDefault();
-        console.log('incoming ID', _id)
         axios.put(`http://localhost:3000/api/task/update`, {
             _id: _id,
         })
         .then( (res) => {
             console.log('PUT RES', res.data);
             const index = this.state.allTasks.findIndex(a => a._id === _id)
-            console.log('INDEX', index)
-
             this.setState({
                 allTasks: this.state.allTasks.filter((_, i) => i !== index),
                 completed: [...this.state.completed, res.data],
@@ -93,8 +89,6 @@ class App extends Component {
     }
     _handleSubmit(e) {
         e.preventDefault()
-        console.log('POST fired');
-
         axios.post(`http://localhost:3000/api/task/new`, {
             desc: this.state.text
         })
@@ -111,7 +105,6 @@ class App extends Component {
         })
     }
     _handleDelete(_id) {
-        console.log('incoming ID', _id)
         axios.post(`http://localhost:3000/api/task/${_id}`, {
             _id: _id
         })
@@ -119,8 +112,6 @@ class App extends Component {
             console.log('DEL RES', res.data)
             let newState = this.state;
             const index = newState.allTasks.findIndex(a => a._id === _id)
-            console.log('INDEX', index)
-
             if (index === -1) return;
             newState.allTasks.splice(index, 1);
             this.setState(newState);
