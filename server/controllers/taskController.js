@@ -4,8 +4,8 @@ module.exports = {
     // CREATE A TASK 
     postCreateTask: async(req, res) => {
         console.log('taskController.postCreateTask()');
-        const { desc } = req.body;
-        if (!desc) return res.status(400).send('Must have a task description');
+        const { title, desc } = req.body;
+        if (!desc || !title) return res.status(400).send('Must have a task description');
         const task = await new Task({
             ...req.body,
         }).save()

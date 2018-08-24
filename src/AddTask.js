@@ -9,11 +9,21 @@ const AddTask = (props) => {
             <h1>MY SHIT LIST</h1>
             <form onSubmit={ props.handleSubmit }>
                 <input
-                    placeholder="what is it?"
+                    placeholder="title?"
                     type="text"
+                    name="title"
                     onChange={ props.handleChange }
-                    value={ props.task }
+                    value={ props.title }
                     />
+
+                <input
+                    placeholder="what about it?"
+                    type="text"
+                    name="desc"
+                    onChange={ props.handleChange }
+                    value={ props.desc }
+                    />
+
                 <button
                     onClick={ props.handleSubmit }>
                     Add 
@@ -26,7 +36,8 @@ const AddTask = (props) => {
 AddTask.propTypes = {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    task: PropTypes.string,
+    title: PropTypes.string,
+    desc: PropTypes.string
 }
 
 export default AddTask;

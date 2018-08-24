@@ -17,7 +17,8 @@ class App extends Component {
         this.state = {  
             allTasks: [],
             completed: [],
-            text: '',
+            title: '',
+            desc: ''
         };
     }
 
@@ -45,7 +46,7 @@ class App extends Component {
     }
     _handleChange(e) {
         this.setState({
-            text: e.target.value
+            [e.target.name]: e.target.value
         });
     }
  
@@ -91,7 +92,8 @@ class App extends Component {
     _handleSubmit(e) {
         e.preventDefault()
         axios.post(`http://localhost:3000/api/task/new`, {
-            desc: this.state.text
+            title: this.state.title,
+            desc: this.state.desc
         })
         .then( (res) => {
             console.log('POST RES', res.data);
@@ -159,7 +161,8 @@ class App extends Component {
                 <AddTask 
                     handleChange={this._handleChange}
                     handleSubmit={this._handleSubmit} 
-                    task={this.state.text}
+                    title={this.state.title}
+                    desc={this.state.desc}
                 />
                 <List 
                     tasks={this.state.allTasks} 
@@ -171,7 +174,9 @@ class App extends Component {
                     className="clear-all-btn">
                     Clear All
                 </button> 
-
+                <button disabled> 
+                    Save List
+                </button>
                 <Completed 
                     completed={this.state.completed}
                     handleDeleteComplete={this._handleDeleteComplete}

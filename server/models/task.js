@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
+    title: { type: String },
     desc: { type: String },
-    extra: { type: String },
     createdAt: { type: Date, default: Date.now() },
     checked: { type: Boolean }
 });
