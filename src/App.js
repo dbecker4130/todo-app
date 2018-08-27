@@ -17,7 +17,7 @@ class App extends Component {
         this.state = {  
             allTasks: [],
             completed: [],
-            title: '',
+            // title: '',
             desc: ''
         };
     }
@@ -92,14 +92,13 @@ class App extends Component {
     _handleSubmit(e) {
         e.preventDefault()
         axios.post(`http://localhost:3000/api/task/new`, {
-            title: this.state.title,
             desc: this.state.desc
         })
         .then( (res) => {
             console.log('POST RES', res.data);
             this.setState({
                 allTasks: [...this.state.allTasks, res.data],
-                text: ''
+                desc: ''
             })
             console.log(this.state)
         })
@@ -160,8 +159,7 @@ class App extends Component {
             <div className="App">
                 <AddTask 
                     handleChange={this._handleChange}
-                    handleSubmit={this._handleSubmit} 
-                    title={this.state.title}
+                    handleSubmit={this._handleSubmit} x
                     desc={this.state.desc}
                 />
                 <List 

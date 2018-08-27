@@ -7,14 +7,14 @@ import './Completed.scss'
 
 
 const Completed = (props) => {
-    console.log('COMP PROPS', props)
-    const { completed } = props;
-    const completedItems = props.completed.map(({title, desc, createdAt, _id}) => {
+    // console.log('COMP PROPS', props)
+    // const { completed } = props;
+    const completedItems = props.completed.map(({desc, createdAt, _id}) => {
         return (
             <li  
                 key={_id} 
                 className="completed-item">
-                    {title}
+                    {desc}
 
                 <button className="undo-comp-btn" onClick={ props.handleUndoChecked.bind(this, _id) }>
                     <i className="fas fa-undo"></i>
@@ -22,8 +22,9 @@ const Completed = (props) => {
                 <button className="del-comp-btn" onClick={ props.handleDeleteComplete.bind(this, _id) }>
                 <i className="fas fa-times"></i>
                 </button>
-                    {desc}
-                    {/* <Dropdown completed={ completed } /> */}
+                <div className="date-created">
+                        { createdAt.toString().slice(6, 10) }
+                </div>
             </li> 
         )
     });

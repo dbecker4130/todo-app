@@ -8,16 +8,9 @@ const AddTask = (props) => {
         <div className="AddTask">
             <h1>MY SHIT LIST</h1>
             <form onSubmit={ props.handleSubmit }>
-                <input
-                    placeholder="title?"
-                    type="text"
-                    name="title"
-                    onChange={ props.handleChange }
-                    value={ props.title }
-                    />
 
                 <input
-                    placeholder="what about it?"
+                    placeholder="what is it?"
                     type="text"
                     name="desc"
                     onChange={ props.handleChange }
@@ -36,7 +29,6 @@ const AddTask = (props) => {
 AddTask.propTypes = {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    title: PropTypes.string,
     desc: PropTypes.string
 }
 
