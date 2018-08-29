@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import autoBind from 'react-autobind';
+import EditAbleLabel from 'react-inline-editing';
 
 import List from './List';
 import AddTask from './AddTask';
 import Completed from './Completed';
-import Dropdown from './Dropdown';
+// import Dropdown from './Dropdown';
 
 import './Reset.scss';
 import './App.scss';
 
+
 class App extends Component {
-    constructor() {
-        super() 
+    constructor(props) {
+        super(props) 
         autoBind(this);
         this.state = {  
             allTasks: [],
             completed: [],
-            // title: '',
+            title: '',
             desc: ''
         };
     }
-
+    
     componentDidMount() {
         axios.get(`http://localhost:3000/api/task`)
         .then( (res) => {
@@ -38,7 +40,7 @@ class App extends Component {
                     })
                 }
             })
-                console.log('refresh state', this.state)
+            console.log('refresh state', this.state)
         })
         .catch( (err) => {
             console.log(err);
@@ -49,7 +51,17 @@ class App extends Component {
             [e.target.name]: e.target.value
         });
     }
- 
+    _handleFocus(text) {
+        console.log('Focused with text: ' + text);
+    }
+    _handleFocusOut(text) {
+        // console.log('Left editor with text: ' + text)
+        this.setState({
+            title: text
+        });
+        console.log('TITLE STATE', this.state.title)
+    }
+    
     _handleChecked(_id, e) {
         e.preventDefault();
         axios.put(`http://localhost:3000/api/task/update`, {
@@ -87,7 +99,7 @@ class App extends Component {
         .catch( (err) => {
             console.log(err);
         })
-
+        
     }
     _handleSubmit(e) {
         e.preventDefault()
@@ -153,14 +165,47 @@ class App extends Component {
             console.log(err)
         });
     }
+    _handleSaveList(e) {
+        e.preventDefault();
+        const tasksToSave = this.state.allTasks.concat(this.state.completed);
+        console.log('TASKS', tasksToSave)
+        axios.post(`http://localhost:3000/api/list/new`, {
+            title: this.state.title,
+            tasks: tasksToSave
+        })
+        .then( (res) => {
+            console.log('POST RES', res.data);
+            this.setState({
+                tasks: [...this.state.completed, res.data],
+                title: ''
+            })
+            console.log(this.state)
+        })
+        .catch( (err) => {
+            console.log(err);
+        })
+    }
 
     render() {
         return(
             <div className="App">
+                {/* <h2>{this.state.title}</h2> */}
+                <EditAbleLabel text='Hello!'
+                    labelClassName="myLabelClass"
+                    inputClassName="myInputClass"
+                    inputWidth='200px'
+                    inputHeight='25px'
+                    inputMaxLength={50}
+                    labelFontWeight='bold'
+                    inputFontWeight='bold'
+                    onFocus={this._handleFocus}
+                    onFocusOut={this._handleFocusOut}
+                    />
                 <AddTask 
                     handleChange={this._handleChange}
-                    handleSubmit={this._handleSubmit} x
+                    handleSubmit={this._handleSubmit}
                     desc={this.state.desc}
+                    title={this.state.title}
                 />
                 <List 
                     tasks={this.state.allTasks} 
@@ -172,7 +217,7 @@ class App extends Component {
                     className="clear-all-btn">
                     Clear All
                 </button> 
-                <button disabled> 
+                <button onClick={this._handleSaveList}> 
                     Save List
                 </button>
                 <Completed 
