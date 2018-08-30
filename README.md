@@ -1,2 +1,2 @@
 # ToDo-App
-To Do App with a unique UI
+To Do App using recompose
