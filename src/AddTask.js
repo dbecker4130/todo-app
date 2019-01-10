@@ -6,14 +6,18 @@ import './AddTask.scss';
 const AddTask = (props) => {
     return (
         <div className="AddTask">
-            <h1>MY SHIT LIST</h1>
+            <h1>{props.title}</h1>
+            {/* In Line Edit */}
             <form onSubmit={ props.handleSubmit }>
+
                 <input
                     placeholder="what is it?"
                     type="text"
+                    name="desc"
                     onChange={ props.handleChange }
-                    value={ props.task }
+                    value={ props.desc }
                     />
+
                 <button
                     onClick={ props.handleSubmit }>
                     Add 
@@ -26,7 +30,7 @@ const AddTask = (props) => {
 AddTask.propTypes = {
     handleChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    task: PropTypes.string,
+    desc: PropTypes.string
 }
 
 export default AddTask;

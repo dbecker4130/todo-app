@@ -20,6 +20,9 @@ const List = (props) => {
                     <button onClick={ props.handleDelete.bind(this, _id) }>
                         Delete
                     </button>
+                    <div className="date-created">
+                        { createdAt.toString().slice(6, 10) }
+                    </div>
                 </label>
             </li>
         )

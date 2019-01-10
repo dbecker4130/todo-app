@@ -17,6 +17,12 @@
 
             cursor: pointer;
             user-select: none;
+
+            .date-created {
+                float: right;
+                padding-right: 5%;
+                font-size: 0.5em;
+            }
         }
 
         .check-container input {

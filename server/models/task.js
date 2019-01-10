@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema({
     desc: { type: String },
-    createdAt: { type: Date, default: Date.now() },
+    createdAt: { type: Date, default: new Date() },
+    updatedAt: { type: Date, default: Date.now() },
     checked: { type: Boolean }
 });
 

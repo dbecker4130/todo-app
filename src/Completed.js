@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Dropdown from './Dropdown';
+
 import './Completed.scss'
 
+
 const Completed = (props) => {
+    console.log('props.completed', props.completed);
+    
     const completedItems = props.completed.map(({desc, createdAt, _id}) => {
         return (
             <li  
@@ -17,6 +22,9 @@ const Completed = (props) => {
                 <button className="del-comp-btn" onClick={ props.handleDeleteComplete.bind(this, _id) }>
                 <i className="fas fa-times"></i>
                 </button>
+                <div className="date-created">
+                        { createdAt.toString().slice(6, 10) }
+                </div>
             </li> 
         )
     });
