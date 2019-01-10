@@ -31,7 +31,7 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.10.2",
     "webpack-cli": "^3.0.2",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.0",
@@ -46,7 +46,7 @@
     "nodemon": "^1.17.5",
     "react": "^16.4.0",
     "react-autobind": "^1.0.6",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.4.2",
     "react-inline-editing": "^1.0.10",
     "recompose": "^0.28.2"
   }
