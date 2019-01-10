@@ -7,6 +7,8 @@ import './Completed.scss'
 
 
 const Completed = (props) => {
+    console.log('props.completed', props.completed);
+    
     const completedItems = props.completed.map(({desc, createdAt, _id}) => {
         return (
             <li  

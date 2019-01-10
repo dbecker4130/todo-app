@@ -47,6 +47,7 @@ class App extends Component {
         })
     }
     _handleChange(e) {
+        console.log('HERE', e.target.value)
         this.setState({
             [e.target.name]: e.target.value
         });
