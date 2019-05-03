@@ -8,6 +8,8 @@ import AddTask from './AddTask';
 import Completed from './Completed';
 // import Dropdown from './Dropdown';
 
+import { Plugin } from 'neutron-ingest-service-plugin';
+
 import './Reset.scss';
 import './App.scss';
 
@@ -221,6 +223,7 @@ class App extends Component {
                 <button onClick={this._handleSaveList}> 
                     Save List
                 </button>
+                <Plugin />
                 <Completed 
                     completed={this.state.completed}
                     handleDeleteComplete={this._handleDeleteComplete}
